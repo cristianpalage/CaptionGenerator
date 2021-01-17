@@ -90,3 +90,5 @@ fastlane/test_output
 iOSInjectionProject/
 
 .DS_Store
+
+cc-frontend/node_modules
