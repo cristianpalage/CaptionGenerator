@@ -12,7 +12,7 @@ function App() {
         </p> */}
         <a
           className="App-link"
-          href=""
+          href="https://testflight.apple.com/join/lR5KtCeT"
           target="_blank"
           rel="noopener noreferrer"
         >
