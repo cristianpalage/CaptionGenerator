@@ -58,10 +58,11 @@ const revDictSearch = async (words) => {
 }
 
 const searchAlgo = async (words) => {
-    const sqlWhereStmtEnd = words.map((x) => { return '\'% ' + x + ' %\'' }).join(' or quote like ');
+    const sqlWhereStmtEnd = words.map((x) => { return '\'% ' + x + '%\'' }).join(' or quote like ');
     const queryStrBasicSearch = 'SELECT * FROM ' + tblNameCaptions + ' WHERE quote like ' + sqlWhereStmtEnd + ';';
 
     const results = await db.query(queryStrBasicSearch);
+    console.log("ress: ");
     console.log(results);
     if (results.rowCount > 0) {  // if there were rows with those associated words
         var scoredResults = results.rows.map((wordObj) => {
@@ -70,8 +71,8 @@ const searchAlgo = async (words) => {
             const quoteArr = tempRow.quote.split(" ");
             quoteArr.forEach(wordInQuote => {
                 words.forEach(wordInSearch => {
-                    const word1 = wordInSearch.toLower().replace(/[(?:\r\n|\r|\n|\t), ]/g, '');
-                    const word2 = wordInQuote.toLower().replace(/[(?:\r\n|\r|\n|\t), ]/g, '');
+                    const word1 = wordInSearch.replace(/[(?:\r\n|\r|\n|\t), ]/g, '');
+                    const word2 = wordInQuote.replace(/[(?:\r\n|\r|\n|\t), ]/g, '');
                     console.log(word1 + " " + word1)
                     if(word1 == word2) {
                         tempRow.score += (1 / words.length);
